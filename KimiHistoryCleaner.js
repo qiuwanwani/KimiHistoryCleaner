@@ -1,25 +1,3 @@
-# KimiHistoryCleaner
-
-KimiHistoryCleaner 是一个用于一键删除 Kimi AI 历史会话记录的浏览器脚本工具。它提供了简单直观的界面，帮助用户快速清理不需要的历史对话。
-
-## 功能特点
-
-- 🚀 批量自动删除历史会话记录
-- 🎯 实时显示已删除的会话数量
-- ⏸ 支持随时暂停和继续删除操作
-- 🎨 简洁美观的悬浮窗界面
-- 🔄 错误自动重试机制，提高删除成功率
-
-## 使用方法
-
-### 方法一：浏览器控制台执行
-
-1. 打开 Kimi AI 对话历史页面
-2. 按下 `F12` 或 `Ctrl+Shift+I` 打开浏览器开发者工具
-3. 切换到 "控制台"（Console）选项卡
-4. 复制下面的代码并粘贴到控制台中，然后按回车执行：
-
-```javascript
 (() => {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -47,11 +25,11 @@ KimiHistoryCleaner 是一个用于一键删除 Kimi AI 历史会话记录的浏�
     try {
       const moreBtn = await waitFor('a.chat-info-item .more-btn');
       moreBtn.click();
-      await sleep(300);                                
+      await sleep(300);                               
 
       const delIcon = await waitFor(() => [...document.querySelectorAll('svg[name="Delete"]')].pop());
       delIcon.closest('li,div').click();
-      await sleep(300);                                 
+      await sleep(300);                                
 
       const confirmBtn = await waitFor(() =>
         document.querySelector('.el-message-box__btns .el-button--primary') ||
@@ -79,11 +57,11 @@ KimiHistoryCleaner 是一个用于一键删除 Kimi AI 历史会话记录的浏�
           toggle(false);
           break;
         }
-        await sleep(300);                              
+        await sleep(300);                             
         continue;
       }
       errorCount = 0;
-      await sleep(300);                                 
+      await sleep(300);                                
     }
   }
 
@@ -139,45 +117,3 @@ KimiHistoryCleaner 是一个用于一键删除 Kimi AI 历史会话记录的浏�
   $('counter').textContent = 0;
   renderStatus();
 })();
-```
-
-### 方法二：使用 Tampermonkey 等脚本管理器
-
-1. 安装 Tampermonkey（油猴）或其他浏览器脚本管理器扩展
-2. 创建新脚本，将 `KimiHistoryCleaner.js` 文件的内容复制进去
-3. 设置脚本匹配规则为 Kimi AI 网站
-4. 保存并启用脚本
-
-## 操作指南
-
-1. 成功运行脚本后，页面右下角会出现一个悬浮窗
-2. 点击「▶ 开始」按钮开始删除历史会话
-3. 实时查看已删除的会话数量
-4. 需要暂停时，点击「⏸ 暂停」按钮
-
-## 功能演示
-
-![KimiHistoryCleaner 功能演示](imgs/image.png)
-
-## 注意事项
-
-1. 请在使用前备份重要的会话记录
-2. 删除操作不可恢复，请谨慎使用
-3. 如果页面结构发生变化，脚本可能需要更新
-4. 脚本包含错误重试机制，但在连续3次错误后会自动停止
-5. 建议不要一次性删除过多会话，以免给服务器带来压力
-
-## 技术说明
-
-- 脚本使用原生 JavaScript 编写，无外部依赖
-- 使用 Promise 和 async/await 实现异步操作
-- 采用事件驱动的设计模式
-- 通过 DOM 操作自动模拟用户点击行为
-
-## 许可证
-
-本项目采用 MIT 许可证 - 查看 LICENSE 文件了解详情
-
-## 贡献
-
-欢迎提交 Issues 和 Pull Requests 来改进这个工具！
